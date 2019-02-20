@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 public class ConnectBDD {
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/securiface?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private static final String DB_URL = "jdbc:mysql://localhost:3303/securiface?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static final String DB_LOGIN = "securiface";
     private static final String DB_PWD = "Freesteak44";
 

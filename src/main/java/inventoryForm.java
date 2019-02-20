@@ -17,6 +17,7 @@ public class inventoryForm {
     private static String userMatricule;
 
     public inventoryForm() {
+
         lbl_nom.setText(Agents.getNomAgent(Integer.valueOf(userMatricule)));
         lbl_prenom.setText(Agents.getPrenomAgent(Integer.valueOf(userMatricule)));
         lbl_role.setText("Agent");
