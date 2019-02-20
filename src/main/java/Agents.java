@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  * Classe permettant la connexion à la base de donnée
@@ -7,8 +8,9 @@ import java.sql.*;
 
 public class Agents {
 
-    public static void getListAgents() {
+    public static ArrayList getListAgents() {
 
+        ArrayList agent = new ArrayList();
         try {
             Connection connection = ConnectBDD.getConnection();
             /* Création de l'objet gérant les requêtes */
@@ -17,20 +19,18 @@ public class Agents {
             /* Exécution d'une requête de lecture */
             ResultSet resultat = statement.executeQuery( "SELECT nom, prenom, matricule, poste, chemin_photo FROM agents;" );
 
+
             /* Récupération des données du résultat de la requête de lecture */
             while ( resultat.next() ) {
                 String nomAgent = resultat.getString( "nom" );
                 String prenomAgent = resultat.getString( "prenom" );
-                String posteAgent = resultat.getString( "poste" );
-                String matriculeAgent = resultat.getString( "matricule" );
-                String chemin_photoAgent = resultat.getString( "chemin_photo" );
-
-                /* Traiter ici les valeurs récupérées. */
-                System.out.println("\nAgent : "+nomAgent+" "+prenomAgent+"\n  - Poste : "+posteAgent+"\n  - Matricule : "+matriculeAgent+"\n  - Chemin Photo : "+chemin_photoAgent+"\n");
+                String infoAgent = nomAgent+" "+prenomAgent;
+                agent.add(infoAgent);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return agent;
     }
 
     public static void putAgent(String nom, String prenom, String poste, String matricule, String password, String chemin_photo){
