@@ -14,6 +14,7 @@ public class inventoryForm {
     private JCheckBox checkBox3;
 
     private static JFrame frame;
+    private static String userMatricule;
 
     public inventoryForm() {
         bt_back.addActionListener(new ActionListener() {
@@ -25,13 +26,15 @@ public class inventoryForm {
         });
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args, String matricule) {
+        userMatricule = matricule;
         frame = new JFrame("inventoryForm");
         frame.setContentPane(new inventoryForm().inventoryPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //frame.setResizable(false);
+        frame.setResizable(false);
         frame.pack();
         frame.setVisible(true);
+
     }
 
 }
