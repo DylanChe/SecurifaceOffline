@@ -65,7 +65,7 @@ public class loginForm {
                                 System.out.println("OK !");
                                 webcam.close();
                                 frame.dispose();
-                                inventoryForm.main(null);
+                                inventoryForm.main(null, "a");
                             } else {
                                 loginErrorForm.main(null);
                             }
