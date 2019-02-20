@@ -73,6 +73,9 @@ public class loginForm {
                         } catch (Exception e) {
                             loginErrorForm.main(null);
                         }
+
+                        bt_login.setEnabled(true);
+                        bt_login.setText("S'authentifier");
                     }
                 };
                 t.start();
