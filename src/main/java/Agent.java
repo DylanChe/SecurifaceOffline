@@ -6,33 +6,51 @@ import java.util.ArrayList;
  * Et la manipulation des différents agents.
  */
 
-public class Agents {
+public class Agent {
+
+    private String nom;
+    private String prenom;
+    private String poste;
+    private String matricule;
+    private String password;
+    private String chemin_photo;
+
+    public Agent(String nom, String prenom, String poste, String matricule, String password, String chemin_photo){
+        this.nom = nom;
+        this.prenom = prenom;
+        this.poste = poste;
+        this.matricule = matricule;
+        this.password = password;
+        this.chemin_photo = chemin_photo;
+    }
 
     public static ArrayList getListAgents() {
 
-        ArrayList agent = new ArrayList();
+        ArrayList agents = new ArrayList();
         try {
             Connection connection = ConnectBDD.getConnection();
             /* Création de l'objet gérant les requêtes */
             Statement statement = connection.createStatement();
 
             /* Exécution d'une requête de lecture */
-            ResultSet resultat = statement.executeQuery( "SELECT nom, prenom, matricule, poste FROM agents;" );
+            ResultSet resultat = statement.executeQuery( "SELECT nom, prenom, poste, matricule, password, chemin_photo FROM agents;" );
 
 
             /* Récupération des données du résultat de la requête de lecture */
             while ( resultat.next() ) {
                 String nomAgent = resultat.getString( "nom" );
                 String prenomAgent = resultat.getString( "prenom" );
-                String matriculeAgent = resultat.getString( "matricule" );
                 String posteAgent = resultat.getString( "poste" );
-                String infoAgent = nomAgent+" "+prenomAgent+" "+matriculeAgent+" "+posteAgent;
-                agent.add(infoAgent);
+                String matriculeAgent = resultat.getString( "matricule" );
+                String passwordAgent = resultat.getString( "password" );
+                String cheminPhotoAgent = resultat.getString( "chemin_photo" );
+                Agent agent = new Agent(nomAgent, prenomAgent, matriculeAgent, posteAgent, passwordAgent, cheminPhotoAgent);
+                agents.add(agent);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return agent;
+        return agents;
     }
 
     public static void putAgent(String nom, String prenom, String poste, String matricule, String password, String chemin_photo){
