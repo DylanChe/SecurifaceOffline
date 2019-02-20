@@ -26,7 +26,6 @@ public class inventoryForm {
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
                 loginForm.main(null);
-
             }
         });
     }
