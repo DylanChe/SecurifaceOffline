@@ -20,7 +20,7 @@ public class inventoryForm {
 
         lbl_nom.setText(Agents.getNomAgent(Integer.valueOf(userMatricule)));
         lbl_prenom.setText(Agents.getPrenomAgent(Integer.valueOf(userMatricule)));
-        lbl_role.setText("Agent");
+        lbl_role.setText(Agents.getPosteAgent(Integer.valueOf(userMatricule)));
 
         bt_back.addActionListener(new ActionListener() {
             @Override

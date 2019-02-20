@@ -17,14 +17,16 @@ public class Agents {
             Statement statement = connection.createStatement();
 
             /* Exécution d'une requête de lecture */
-            ResultSet resultat = statement.executeQuery( "SELECT nom, prenom, matricule, poste, chemin_photo FROM agents;" );
+            ResultSet resultat = statement.executeQuery( "SELECT nom, prenom, matricule, poste FROM agents;" );
 
 
             /* Récupération des données du résultat de la requête de lecture */
             while ( resultat.next() ) {
                 String nomAgent = resultat.getString( "nom" );
                 String prenomAgent = resultat.getString( "prenom" );
-                String infoAgent = nomAgent+" "+prenomAgent;
+                String matriculeAgent = resultat.getString( "matricule" );
+                String posteAgent = resultat.getString( "poste" );
+                String infoAgent = nomAgent+" "+prenomAgent+" "+matriculeAgent+" "+posteAgent;
                 agent.add(infoAgent);
             }
         } catch (SQLException e) {
@@ -102,6 +104,28 @@ public class Agents {
             e.printStackTrace();
         }
         return pathfile;
+    }
+
+    public static String getPosteAgent(Integer agentMatricule){
+
+        String poste="";
+        try {
+
+            Connection connection = ConnectBDD.getConnection();
+            /* Création de l'objet gérant les requêtes */
+            Statement statement = connection.createStatement();
+
+            /* Exécution d'une requête de lecture */
+            ResultSet resultat = statement.executeQuery( "SELECT poste FROM agents WHERE matricule = '"+agentMatricule+"';" );
+
+            if (resultat.next()) {
+                /* Traiter ici les valeurs récupérées. */
+                poste = resultat.getString("poste");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return poste;
     }
 
     public static String getNomAgent(Integer agentMatricule){
