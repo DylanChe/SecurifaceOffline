@@ -126,6 +126,28 @@ public class Agents {
         return name;
     }
 
+    public static String getPrenomAgent(Integer agentMatricule){
+
+        String name="";
+        try {
+
+            Connection connection = ConnectBDD.getConnection();
+            /* Création de l'objet gérant les requêtes */
+            Statement statement = connection.createStatement();
+
+            /* Exécution d'une requête de lecture */
+            ResultSet resultat = statement.executeQuery( "SELECT prenom FROM agents WHERE matricule = '"+agentMatricule+"';" );
+
+            if (resultat.next()) {
+                /* Traiter ici les valeurs récupérées. */
+                name = resultat.getString("prenom");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return name;
+    }
+
     public static boolean isExisting (Integer agentMatricule){
 
         Boolean verif = false;
@@ -147,7 +169,7 @@ public class Agents {
         return verif;
     }
 
-    public static boolean reservation (Integer agentMatricule, String materielName){
+    public static boolean getReservation (Integer agentMatricule, String materielName){
 
         Boolean verif = false;
         try {
@@ -170,5 +192,57 @@ public class Agents {
             e.printStackTrace();
         }
         return verif;
+    }
+
+    public static void putReservation(Integer agentMatricule, String materielName){
+
+        try {
+
+            Connection connection = ConnectBDD.getConnection();
+
+            /* Création de l'objet gérant les requêtes */
+            Statement statement = connection.createStatement();
+
+            String agentName = getNomAgent(agentMatricule);
+
+            String INSERT_QUERY = "INSERT INTO reservation (nomAgent, nomMateriel) VALUES (?,?)";
+
+            /* Exécution d'une requête d'écriture */
+            PreparedStatement st = connection.prepareStatement( INSERT_QUERY, Statement.RETURN_GENERATED_KEYS );
+            st.setString( 1, agentName );
+            st.setString( 2, materielName );
+            st.executeUpdate();
+            ResultSet rs = st.getGeneratedKeys();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void removeReservation(Integer agentMatricule, String materielName){
+
+        try {
+
+            Connection connection = ConnectBDD.getConnection();
+
+            /* Création de l'objet gérant les requêtes */
+            Statement statement = connection.createStatement();
+
+            String agentName = getNomAgent(agentMatricule);
+
+            String DELETE_QUERY = "DELETE FROM reservation WHERE nomAgent = '"+agentName+"' AND nomMateriel = '"+materielName+"'";
+
+            /* Exécution d'une requête d'écriture */
+            PreparedStatement st = connection.prepareStatement( DELETE_QUERY, Statement.RETURN_GENERATED_KEYS );
+            st.setString( 1, agentName );
+            st.setString( 2, materielName );
+            st.executeUpdate();
+            ResultSet rs = st.getGeneratedKeys();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
