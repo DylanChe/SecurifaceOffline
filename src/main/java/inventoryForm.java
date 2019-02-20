@@ -16,11 +16,18 @@ public class inventoryForm {
     private static JFrame frame;
 
     public inventoryForm() {
+
+
+        lbl_nom.setText("test");
+        lbl_prenom.setText("test-prenom");
+
+
         bt_back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.dispose();
                 loginForm.main(null);
+
             }
         });
     }
