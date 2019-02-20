@@ -1,6 +1,7 @@
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ArrayList;
 
 /**
  * Classe permettant la connexion à la base de donnée
@@ -9,31 +10,26 @@ import java.util.Date;
 
 public class Materiel {
 
-    public static void getListMateriel() {
+    public static ArrayList getListMateriel() {
 
+        ArrayList materiel = new ArrayList();
         try {
             Connection connection = ConnectBDD.getConnection();
             /* Création de l'objet gérant les requêtes */
             Statement statement = connection.createStatement();
 
             /* Exécution d'une requête de lecture */
-            ResultSet resultat = statement.executeQuery( "SELECT nom, quantite, date_ajout, dern_retrait, description FROM materiel;" );
+            ResultSet resultat = statement.executeQuery( "SELECT nom FROM materiel;" );
 
             /* Récupération des données du résultat de la requête de lecture */
             while ( resultat.next() ) {
                 String nomMateriel = resultat.getString( "nom" );
-                String quantite = resultat.getString("quantite");
-                String date_ajoutMateriel = resultat.getString( "date_ajout" );
-                String dern_retraitMateriel = resultat.getString( "dern_retrait" );
-                String description = resultat.getString("description");
-
-                /* Traiter ici les valeurs récupérées. */
-                System.out.println("\nMatériel : "+nomMateriel+"\nQuantité : "+quantite+"\nDate d'ajout : "+date_ajoutMateriel+"\nDernier Retrait : "+dern_retraitMateriel+"\nDescription : "+description+"\n");
-                System.out.println("----------------------------------------------------------\n");
+                materiel.add(nomMateriel);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return materiel;
     }
 
     //    CREER UN MATERIEL DONNE
