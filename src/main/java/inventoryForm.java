@@ -17,11 +17,9 @@ public class inventoryForm {
     private static String userMatricule;
 
     public inventoryForm() {
-
-
-        lbl_nom.setText("test");
-        lbl_prenom.setText("test-prenom");
-
+        lbl_nom.setText(Agents.getNomAgent(Integer.valueOf(userMatricule)));
+        lbl_prenom.setText(Agents.getPrenomAgent(Integer.valueOf(userMatricule)));
+        lbl_role.setText("Agent");
 
         bt_back.addActionListener(new ActionListener() {
             @Override
