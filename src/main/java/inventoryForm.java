@@ -29,7 +29,7 @@ public class inventoryForm {
         frame = new JFrame("inventoryForm");
         frame.setContentPane(new inventoryForm().inventoryPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //frame.setResizable(false);
         frame.pack();
         frame.setVisible(true);
     }
