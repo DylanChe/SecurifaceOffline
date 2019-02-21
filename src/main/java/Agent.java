@@ -107,7 +107,7 @@ public class Agent {
             Connection connection = ConnectBDD.getConnection();
             /* Création de l'objet gérant les requêtes */
             Statement statement = connection.createStatement();
-            ResultSet resultat = statement.executeQuery("SELECT nom, prenom, poste, matricule, password, chemin_photo FROM agents WHERE matricule ==" + agentMatricule + ";");
+            ResultSet resultat = statement.executeQuery("SELECT nom, prenom, poste, matricule, password, chemin_photo FROM agents WHERE matricule =" + agentMatricule + ";");
             resultat.next();
             String nomAgent = resultat.getString("nom");
             String prenomAgent = resultat.getString("prenom");

@@ -100,7 +100,7 @@ public class Materiel {
             Statement statement = connection.createStatement();
 
             /* Exécution d'une requête de lecture */
-            ResultSet resultat = statement.executeQuery( "SELECT nom, date_ajout, date_retrait, description, quantite FROM materiel WHERE nom == " + _nomMateriel + ";" );
+            ResultSet resultat = statement.executeQuery( "SELECT nom, date_ajout, date_retrait, description, quantite FROM materiel WHERE nom = " + _nomMateriel + ";" );
             resultat.next();
             String nomMateriel = resultat.getString( "nom" );
             String dateAjoutMateriel = resultat.getString( "date_ajout" );
