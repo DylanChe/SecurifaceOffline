@@ -18,9 +18,9 @@ public class inventoryForm {
 
     public inventoryForm() {
 
-        lbl_nom.setText(Agent.getNomAgent(Integer.valueOf(userMatricule)));
-        lbl_prenom.setText(Agent.getPrenomAgent(Integer.valueOf(userMatricule)));
-        lbl_role.setText(Agent.getPosteAgent(Integer.valueOf(userMatricule)));
+        lbl_nom.setText(Agent.getAgent(Integer.valueOf(userMatricule)).getNom());
+        lbl_prenom.setText(Agent.getAgent(Integer.valueOf(userMatricule)).getPrenom());
+        lbl_role.setText(Agent.getAgent(Integer.valueOf(userMatricule)).getPoste());
 
         bt_back.addActionListener(new ActionListener() {
             @Override
