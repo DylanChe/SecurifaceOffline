@@ -26,7 +26,7 @@ public class Agent {
 
     public static ArrayList getListAgents() {
 
-        ArrayList agents = new ArrayList();
+        ArrayList<Agent> agents = new ArrayList();
         try {
             Connection connection = ConnectBDD.getConnection();
             /* Création de l'objet gérant les requêtes */
@@ -101,93 +101,72 @@ public class Agent {
             e.printStackTrace();
         }
     }
+    public static Agent getAgent(Integer agentMatricule) {
 
-    public static String getImageAgent(Integer agentMatricule){
-
-        String pathfile="";
         try {
-
             Connection connection = ConnectBDD.getConnection();
             /* Création de l'objet gérant les requêtes */
             Statement statement = connection.createStatement();
-
-            /* Exécution d'une requête de lecture */
-            ResultSet resultat = statement.executeQuery( "SELECT chemin_photo FROM agents WHERE matricule = '"+agentMatricule+"';" );
-
-            if (resultat.next()) {
-                /* Traiter ici les valeurs récupérées. */
-                pathfile = resultat.getString("chemin_photo");
-            }
+            ResultSet resultat = statement.executeQuery("SELECT nom, prenom, poste, matricule, password, chemin_photo FROM agents;");
+            String nomAgent = resultat.getString("nom");
+            String prenomAgent = resultat.getString("prenom");
+            String posteAgent = resultat.getString("poste");
+            String matriculeAgent = resultat.getString("matricule");
+            String passwordAgent = resultat.getString("password");
+            String cheminPhotoAgent = resultat.getString("chemin_photo");
+            return new Agent(nomAgent, prenomAgent, matriculeAgent, posteAgent, passwordAgent, cheminPhotoAgent);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return pathfile;
+        return null;
     }
 
-    public static String getPosteAgent(Integer agentMatricule){
+    public String getNom() {
+        return nom;
+    }
 
-        String poste="";
-        try {
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 
-            Connection connection = ConnectBDD.getConnection();
-            /* Création de l'objet gérant les requêtes */
-            Statement statement = connection.createStatement();
+    public String getPrenom() {
+        return prenom;
+    }
 
-            /* Exécution d'une requête de lecture */
-            ResultSet resultat = statement.executeQuery( "SELECT poste FROM agents WHERE matricule = '"+agentMatricule+"';" );
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
 
-            if (resultat.next()) {
-                /* Traiter ici les valeurs récupérées. */
-                poste = resultat.getString("poste");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public String getPoste() {
         return poste;
     }
 
-    public static String getNomAgent(Integer agentMatricule){
-
-        String name="";
-        try {
-
-            Connection connection = ConnectBDD.getConnection();
-            /* Création de l'objet gérant les requêtes */
-            Statement statement = connection.createStatement();
-
-            /* Exécution d'une requête de lecture */
-            ResultSet resultat = statement.executeQuery( "SELECT nom FROM agents WHERE matricule = '"+agentMatricule+"';" );
-
-            if (resultat.next()) {
-                /* Traiter ici les valeurs récupérées. */
-                name = resultat.getString("nom");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return name;
+    public void setPoste(String poste) {
+        this.poste = poste;
     }
 
-    public static String getPrenomAgent(Integer agentMatricule){
+    public String getMatricule() {
+        return matricule;
+    }
 
-        String name="";
-        try {
+    public void setMatricule(String matricule) {
+        this.matricule = matricule;
+    }
 
-            Connection connection = ConnectBDD.getConnection();
-            /* Création de l'objet gérant les requêtes */
-            Statement statement = connection.createStatement();
+    public String getPassword() {
+        return password;
+    }
 
-            /* Exécution d'une requête de lecture */
-            ResultSet resultat = statement.executeQuery( "SELECT prenom FROM agents WHERE matricule = '"+agentMatricule+"';" );
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-            if (resultat.next()) {
-                /* Traiter ici les valeurs récupérées. */
-                name = resultat.getString("prenom");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return name;
+    public String getChemin_photo() {
+        return chemin_photo;
+    }
+
+    public void setChemin_photo(String chemin_photo) {
+        this.chemin_photo = chemin_photo;
     }
 
     public static boolean isExisting (Integer agentMatricule){
@@ -221,7 +200,7 @@ public class Agent {
             /* Création de l'objet gérant les requêtes */
             Statement statement = connection.createStatement();
 
-            String agentName = getNomAgent(agentMatricule);
+            String agentName = getAgent(agentMatricule).getNom();
 
             /* Exécution d'une requête de lecture */
             ResultSet resultat = statement.executeQuery( "SELECT nomAgent, nomMateriel FROM reservation WHERE nomAgent = '"+agentName+"' AND nomMateriel = '"+materielName+"';" );
@@ -245,7 +224,7 @@ public class Agent {
             /* Création de l'objet gérant les requêtes */
             Statement statement = connection.createStatement();
 
-            String agentName = getNomAgent(agentMatricule);
+            String agentName = getAgent(agentMatricule).getNom();
 
             String INSERT_QUERY = "INSERT INTO reservation (nomAgent, nomMateriel) VALUES (?,?)";
 
@@ -261,7 +240,6 @@ public class Agent {
         }
 
     }
-
     public static void removeReservation(Integer agentMatricule, String materielName){
 
         try {
@@ -271,7 +249,7 @@ public class Agent {
             /* Création de l'objet gérant les requêtes */
             Statement statement = connection.createStatement();
 
-            String agentName = getNomAgent(agentMatricule);
+            String agentName = getAgent(agentMatricule).getNom();
 
             String DELETE_QUERY = "DELETE FROM reservation WHERE nomAgent = '"+agentName+"' AND nomMateriel = '"+materielName+"'";
 
@@ -285,6 +263,5 @@ public class Agent {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 }
