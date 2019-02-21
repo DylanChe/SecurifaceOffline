@@ -115,7 +115,7 @@ public class Agent {
             String matriculeAgent = resultat.getString("matricule");
             String passwordAgent = resultat.getString("password");
             String cheminPhotoAgent = resultat.getString("chemin_photo");
-            return new Agent(nomAgent, prenomAgent, matriculeAgent, posteAgent, passwordAgent, cheminPhotoAgent);
+            return new Agent(nomAgent, prenomAgent, posteAgent, matriculeAgent, passwordAgent, cheminPhotoAgent);
         } catch (SQLException e) {
             e.printStackTrace();
         }
