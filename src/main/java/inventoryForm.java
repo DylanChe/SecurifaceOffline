@@ -20,15 +20,17 @@ public class inventoryForm {
     private static JFrame frame;
     private static String userMatricule;
 
-    public inventoryForm() throws MalformedURLException {
+    public inventoryForm() {
 
+        // On renseigne les infos de lagent
         lbl_nom.setText(Agent.getAgent(Integer.valueOf(userMatricule)).getNom());
         lbl_prenom.setText(Agent.getAgent(Integer.valueOf(userMatricule)).getPrenom());
         lbl_role.setText(Agent.getAgent(Integer.valueOf(userMatricule)).getPoste());
 
+        // On renseigne la photo de lagent
         ImageIcon tmp = (ImageIcon) image.getIcon();
-        ImageIcon originalImage = new ImageIcon(new URL("http://mgl.skyrock.net/big.138643852.jpg?78138742"));
-        ImageIcon scaledImage = new ImageIcon(originalImage.getImage().getScaledInstance(originalImage.getIconWidth() / 4,originalImage.getIconHeight() / 4, Image.SCALE_SMOOTH));
+        ImageIcon originalImage = new ImageIcon(getClass().getClassLoader().getResource(Agent.getAgent(Integer.valueOf(userMatricule)).getChemin_photo()));
+        ImageIcon scaledImage = new ImageIcon(originalImage.getImage().getScaledInstance(200,150, Image.SCALE_SMOOTH));
         image.setIcon(scaledImage);
 
 
