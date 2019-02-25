@@ -12,14 +12,14 @@ public class Materiel {
 
     private String nom;
     private String date_ajout;
-    private String date_retrait;
+    private String dern_retrait;
     private String description;
     private int quantite;
 
-    public Materiel(String nom, String date_ajout, String date_retrait, String description, int quantite) {
+    public Materiel(String nom, String date_ajout, String dern_retrait, String description, int quantite) {
         this.nom = nom;
         this.date_ajout = date_ajout;
-        this.date_retrait = date_retrait;
+        this.dern_retrait = dern_retrait;
         this.description = description;
         this.quantite = quantite;
     }
@@ -40,12 +40,12 @@ public class Materiel {
         this.date_ajout = date_ajout;
     }
 
-    public String getDate_retrait() {
-        return date_retrait;
+    public String getDern_retrait() {
+        return dern_retrait;
     }
 
-    public void setDate_retrait(String date_retrait) {
-        this.date_retrait = date_retrait;
+    public void setDern_retrait(String dern_retrait) {
+        this.dern_retrait = dern_retrait;
     }
 
     public String getDescription() {
@@ -75,16 +75,16 @@ public class Materiel {
             Statement statement = connection.createStatement();
 
             /* Exécution d'une requête de lecture */
-            ResultSet resultat = statement.executeQuery( "SELECT nom, date_ajout, date_retrait, description, quantite FROM materiel;" );
+            ResultSet resultat = statement.executeQuery( "SELECT nom, date_ajout, dern_retrait, description, quantite FROM materiel;" );
 
             /* Récupération des données du résultat de la requête de lecture */
             while ( resultat.next() ) {
                 String nomMateriel = resultat.getString( "nom" );
                 String dateAjoutMateriel = resultat.getString( "date_ajout" );
-                String dateRetraitMateriel = resultat.getString( "date_retrait" );
+                String dernRetraitMateriel = resultat.getString( "dern_retrait" );
                 String descriptionMateriel = resultat.getString( "description" );
                 String quantiteMateriel = resultat.getString( "quantite" );
-                Materiel materiel = new Materiel(nomMateriel, dateAjoutMateriel, dateRetraitMateriel, descriptionMateriel, Integer.valueOf(quantiteMateriel));
+                Materiel materiel = new Materiel(nomMateriel, dateAjoutMateriel, dernRetraitMateriel, descriptionMateriel, Integer.valueOf(quantiteMateriel));
                 materiels.add(materiel);
             }
         } catch (SQLException e) {
@@ -100,14 +100,14 @@ public class Materiel {
             Statement statement = connection.createStatement();
 
             /* Exécution d'une requête de lecture */
-            ResultSet resultat = statement.executeQuery( "SELECT nom, date_ajout, date_retrait, description, quantite FROM materiel WHERE nom = " + _nomMateriel + ";" );
+            ResultSet resultat = statement.executeQuery( "SELECT nom, date_ajout, dern_retrait, description, quantite FROM materiel WHERE nom = " + _nomMateriel + ";" );
             resultat.next();
             String nomMateriel = resultat.getString( "nom" );
             String dateAjoutMateriel = resultat.getString( "date_ajout" );
-            String dateRetraitMateriel = resultat.getString( "date_retrait" );
+            String dernRetraitMateriel = resultat.getString( "dern_retrait" );
             String descriptionMateriel = resultat.getString( "description" );
             String quantiteMateriel = resultat.getString( "quantite" );
-            return new Materiel(nomMateriel, dateAjoutMateriel, dateRetraitMateriel, descriptionMateriel, Integer.valueOf(quantiteMateriel));
+            return new Materiel(nomMateriel, dateAjoutMateriel, dernRetraitMateriel, descriptionMateriel, Integer.valueOf(quantiteMateriel));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -243,5 +243,16 @@ public class Materiel {
         }
 
         return verif;
+    }
+
+    @Override
+    public String toString() {
+        return "Materiel{" +
+                "nom='" + nom + '\'' +
+                ", date_ajout='" + date_ajout + '\'' +
+                ", dern_retrait='" + dern_retrait + '\'' +
+                ", description='" + description + '\'' +
+                ", quantite=" + quantite +
+                '}';
     }
 }

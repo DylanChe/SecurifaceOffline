@@ -265,4 +265,16 @@ public class Agent {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public String toString() {
+        return "Agent{" +
+                "nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", poste='" + poste + '\'' +
+                ", matricule='" + matricule + '\'' +
+                ", password='" + password + '\'' +
+                ", chemin_photo='" + chemin_photo + '\'' +
+                '}';
+    }
 }
