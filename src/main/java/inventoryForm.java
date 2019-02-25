@@ -33,7 +33,6 @@ public class inventoryForm {
         ImageIcon scaledImage = new ImageIcon(originalImage.getImage().getScaledInstance(200,150, Image.SCALE_SMOOTH));
         image.setIcon(scaledImage);
 
-
         bt_back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
