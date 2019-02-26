@@ -100,7 +100,7 @@ public class Materiel {
             Statement statement = connection.createStatement();
 
             /* Exécution d'une requête de lecture */
-            ResultSet resultat = statement.executeQuery( "SELECT nom, date_ajout, dern_retrait, description, quantite FROM materiel WHERE nom = " + _nomMateriel + ";" );
+            ResultSet resultat = statement.executeQuery( "SELECT nom, date_ajout, dern_retrait, description, quantite FROM materiel WHERE nom = '" + _nomMateriel + "';" );
             resultat.next();
             String nomMateriel = resultat.getString( "nom" );
             String dateAjoutMateriel = resultat.getString( "date_ajout" );
@@ -145,12 +145,10 @@ public class Materiel {
     }
 
     // RETOURNE LA QUANTITE D'UN MATERIEL DONNE
-    /*
-    public static Integer getQteMateriel(String nom){
 
+    public static Integer getQteMateriel(String nom){
         Integer quantite= 0;
         try {
-
             Connection connection = ConnectBDD.getConnection();
             // Création de l'objet gérant les requêtes
             Statement statement = connection.createStatement();
@@ -168,7 +166,6 @@ public class Materiel {
         }
         return quantite;
     }
-    */
 
     //   ATTRIBUE UNE QUANTITE A UN MATERIEL DONNE
     public static Integer setQteMateriel(String nom , Integer evoquantite){

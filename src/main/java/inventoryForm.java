@@ -40,8 +40,9 @@ public class inventoryForm {
         // On ajoute la liste
         materialPanel.setLayout(new BoxLayout(materialPanel, BoxLayout.PAGE_AXIS));
         for (Materiel materiel : materiels) {
-            //boolean isEmpty = Materiel.isEmpty(materiel.getNom());
-            boolean isEmpty = false;
+            // ========================================
+            boolean isEmpty = Materiel.isEmpty(materiel.getNom());
+            //boolean isEmpty = false;
 
             JPanel matPan = new JPanel();
             matPan.setLayout(new BorderLayout());
@@ -58,9 +59,13 @@ public class inventoryForm {
                 @Override
                 public void itemStateChanged(ItemEvent e) {
                     if (cb.getState()) {
+                        // =======================================
                         System.out.println("SELECTED " + materiel.getNom() + " !");
+                        Materiel.setQteMateriel(materiel.getNom(), -1);
                     } else {
+                        // =======================================
                         System.out.println("UNSELECTED " + materiel.getNom() + " !");
+                        Materiel.setQteMateriel(materiel.getNom(), +1);
                     }
                 }
             });
