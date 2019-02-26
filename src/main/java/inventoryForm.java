@@ -42,7 +42,7 @@ public class inventoryForm {
         for (Materiel materiel : materiels) {
             // ========================================
             boolean isEmpty = Materiel.isEmpty(materiel.getNom());
-            //boolean isEmpty = false;
+            boolean isReserved = Agent.getReservation(Integer.valueOf(userMatricule), materiel.getNom());
 
             JPanel matPan = new JPanel();
             matPan.setLayout(new BorderLayout());
@@ -50,11 +50,9 @@ public class inventoryForm {
             // ----- LABEL
             JLabel lbl = new JLabel(materiel.getNom());
             matPan.add(lbl, BorderLayout.LINE_START);
-            lbl.setEnabled(!isEmpty);
 
             // ----- CHECKBOX
             Checkbox cb = new Checkbox();
-            cb.setEnabled(!isEmpty);
             cb.addItemListener(new ItemListener() {
                 @Override
                 public void itemStateChanged(ItemEvent e) {
@@ -62,15 +60,24 @@ public class inventoryForm {
                         // =======================================
                         System.out.println("SELECTED " + materiel.getNom() + " !");
                         Materiel.setQteMateriel(materiel.getNom(), -1);
+                        Agent.putReservation(Integer.valueOf(userMatricule), materiel.getNom());
                     } else {
                         // =======================================
                         System.out.println("UNSELECTED " + materiel.getNom() + " !");
                         Materiel.setQteMateriel(materiel.getNom(), +1);
+                        Agent.removeReservation(Integer.valueOf(userMatricule), materiel.getNom());
                     }
                 }
             });
             matPan.add(cb, BorderLayout.LINE_END);
             matPan.setMaximumSize(new Dimension(Integer.MAX_VALUE, matPan.getMinimumSize().height + 5));
+
+            if (isReserved) {
+                cb.setState(true);
+            } else {
+                lbl.setEnabled(!isEmpty);
+                cb.setEnabled(!isEmpty);
+            }
 
             materialPanel.add(matPan);
         }
