@@ -78,7 +78,6 @@ public class Agent {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void removeAgent(Integer agentMatricule){
@@ -195,8 +194,6 @@ public class Agent {
 
         Boolean verif = false;
         try {
-
-
             Connection connection = ConnectBDD.getConnection();
             /* Création de l'objet gérant les requêtes */
             Statement statement = connection.createStatement();
@@ -252,7 +249,7 @@ public class Agent {
 
             String agentName = getAgent(agentMatricule).getNom();
 
-            String DELETE_QUERY = "DELETE FROM reservation WHERE nomAgent = '"+agentName+"' AND nomMateriel = '"+materielName+"'";
+            String DELETE_QUERY = "DELETE ALL FROM reservation WHERE nomAgent = '"+agentName+"' AND nomMateriel = '"+materielName+"'";
 
             /* Exécution d'une requête d'écriture */
             PreparedStatement st = connection.prepareStatement( DELETE_QUERY, Statement.RETURN_GENERATED_KEYS );
