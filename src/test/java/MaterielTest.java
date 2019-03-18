@@ -23,6 +23,6 @@ public class MaterielTest extends TestCase {
     public void testQuantiteMateriel()
     {
         Materiel materiel = new Materiel("MaterielName", "10-09-2019", "11-09-2019", "MaterielDescription", 10);
-assertEquals(materiel.getQuantite(), "10");
+        assertEquals(materiel.getQuantite(), "10");
     }
 }
