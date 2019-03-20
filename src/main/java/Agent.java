@@ -6,6 +6,8 @@ import java.util.ArrayList;
  * Et la manipulation des différents agents.
  */
 
+// TEST
+
 public class Agent {
 
     private String nom;
