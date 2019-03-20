@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Et la manipulation des différents agents.
  */
 
-// TEST SonarQube #3
+// TEST SonarQube #4
 
 public class Agent {
 
