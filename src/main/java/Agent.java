@@ -100,6 +100,7 @@ public class Agent {
             e.printStackTrace();
         }
     }
+
     public static Agent getAgent(Integer agentMatricule) {
 
         try {
@@ -249,14 +250,13 @@ public class Agent {
 
             String agentName = getAgent(agentMatricule).getNom();
 
-            String DELETE_QUERY = "DELETE ALL FROM reservation WHERE nomAgent = '"+agentName+"' AND nomMateriel = '"+materielName+"'";
+            String DELETE_QUERY = "DELETE FROM reservation WHERE nomAgent = `"+agentName+"` AND nomMateriel = `"+materielName+"`";
 
             /* Exécution d'une requête d'écriture */
-            PreparedStatement st = connection.prepareStatement( DELETE_QUERY, Statement.RETURN_GENERATED_KEYS );
+            PreparedStatement st = connection.prepareStatement(DELETE_QUERY);
             st.setString( 1, agentName );
             st.setString( 2, materielName );
             st.executeUpdate();
-            ResultSet rs = st.getGeneratedKeys();
 
         } catch (SQLException e) {
             e.printStackTrace();

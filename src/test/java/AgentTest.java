@@ -25,4 +25,5 @@ public class AgentTest extends TestCase {
         Agent agent = new Agent("AgentName", "AgentFirstName", "Guardien", "123", "AgentPassword", "./resources/agentPics.jpg");
         assertEquals(agent.getMatricule(), "123");
     }
+    // TEST
 }
