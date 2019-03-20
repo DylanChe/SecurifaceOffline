@@ -2,6 +2,8 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+import java.sql.SQLException;
+
 public class MaterielTest extends TestCase {
 
     public MaterielTest( String testName )
@@ -25,4 +27,6 @@ public class MaterielTest extends TestCase {
         Materiel materiel = new Materiel("MaterielName", "10-09-2019", "11-09-2019", "MaterielDescription", 10);
         assertEquals(materiel.getQuantite(), "10");
     }
+
+
 }

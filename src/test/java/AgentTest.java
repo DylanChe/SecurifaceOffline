@@ -26,4 +26,9 @@ public class AgentTest extends TestCase {
         assertEquals(agent.getMatricule(), "123");
     }
     // TEST
+    public void testBdd()
+    {
+        int tmp = Materiel.getQteMateriel("Tazer");
+        assertEquals(tmp, 6);
+    }
 }
