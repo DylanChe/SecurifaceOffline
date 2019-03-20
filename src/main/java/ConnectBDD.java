@@ -10,7 +10,7 @@ public class ConnectBDD {
     private static final String DB_PWD = "Freesteak44";
     */
 
-    private static final String DB_URL = "jdbc:mysql://localhost:3303/securiface?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/securiface?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static final String DB_LOGIN = "root";
     private static final String DB_PWD = "";
 
